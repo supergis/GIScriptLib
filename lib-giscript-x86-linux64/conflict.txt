@@ -1,0 +1,7 @@
+libgomp.so.1.0.0.x
+libgomp.so.1.x
+libgomp.so.x
+libsqlite3.so.0.x
+libsqlite3.so.x
+libstdc++.so.6.x
+libstdc++.so.x

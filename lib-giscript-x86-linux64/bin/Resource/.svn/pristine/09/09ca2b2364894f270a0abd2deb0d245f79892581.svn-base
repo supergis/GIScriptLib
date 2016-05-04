@@ -1,0 +1,19 @@
+#include <lib/ClipPlane.glsllib>
+
+void main()
+{	
+	if(gl_Color.a < 0.1)
+	{
+		discard;
+	}
+
+#if CLIP
+	if(!Clip())
+	{
+		discard;
+		return;
+	}
+#endif
+	
+	gl_FragColor = gl_Color;
+}

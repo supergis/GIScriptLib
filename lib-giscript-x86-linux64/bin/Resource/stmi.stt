@@ -1,0 +1,15 @@
+SuperMap Style Mapping Table
+Version 6.0
+SymbolBegin
+(id:32;g:MapInfo 3.0 Compatible),(id:1)
+(id:33;g:MapInfo Arrows),(id:2)
+(id:0;g:AMBU1-32.BMP),(id:3)
+SymbolEnd
+
+LineStyleBegin
+(id:2),(id:6)
+LineStyleEnd
+
+FillStyleBegin
+(id:3),(id:6)
+FillStyleEnd

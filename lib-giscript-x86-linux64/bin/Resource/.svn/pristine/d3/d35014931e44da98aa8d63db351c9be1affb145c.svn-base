@@ -1,0 +1,24 @@
+#include <lib/ClipPlane.glsllib>
+
+uniform sampler2D diffuseTexture;
+
+void main()
+{
+	vec4 color = texture2D(diffuseTexture, gl_TexCoord[0].xy);
+	
+	if(color.a < 0.1)
+	{
+		discard;
+	}
+	
+#if CLIP
+	if(!Clip())
+	{
+		discard;
+		return;
+	}
+#endif
+
+	gl_FragColor = color;
+	gl_FragColor.rgb = gl_FragColor.rgb * gl_Color.rgb;
+}

@@ -1,0 +1,1 @@
+ln -s -f $PWD/lib ~/anaconda3/envs/GISpark/lib/python3.5/site-packages/giscript

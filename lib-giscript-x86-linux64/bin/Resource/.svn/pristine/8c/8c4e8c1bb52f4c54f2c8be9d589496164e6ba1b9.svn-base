@@ -1,0 +1,67 @@
+uniform int clip_mode;
+uniform int clip_plane_count;
+uniform vec4 clip_planes[6];
+
+varying vec4 clip_vertex;
+
+//! \brief 获取指定的点到该平面的距离值。
+// pos指定的点的位置
+// planeNormal平面的法向量
+// disToOrigin 平面到原点的距离
+float GetDistance(vec3 pos, vec3 planeNormal, float disToOrigin)
+{
+	return dot(planeNormal, pos) + disToOrigin;
+}
+
+//剪裁掉位于所有裁剪面后面的部分
+bool ClipBehindAllPlane()
+{
+	if(clip_plane_count == 0)
+	{
+		return true;
+	}
+	for(int i = 0; i < clip_plane_count; i++)
+	{
+		if(GetDistance(clip_vertex.xyz, clip_planes[i].xyz, clip_planes[i].w) < 0.0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+//剪裁掉位于任意裁剪面后面的部分
+bool ClipBehindAnyPlane()
+{
+	if(clip_plane_count == 0)
+	{
+		return true;
+	}
+	for(int i = 0; i < clip_plane_count; i++)
+	{
+		if(GetDistance(clip_vertex.xyz, clip_planes[i].xyz, clip_planes[i].w) < 0.0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Clip()
+{
+	if(clip_mode == 1)
+	{
+		if(!ClipBehindAnyPlane())
+		{
+			return false;
+		}
+	}
+	else if(clip_mode == 2)
+	{
+		if(!ClipBehindAllPlane())
+		{
+			return false;
+		}
+	}
+	return true;
+}
